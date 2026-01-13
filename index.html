@@ -1,0 +1,1094 @@
+<!doctype html>
+<html lang="en" class="h-full">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vaidya - Ayurvedic Wellness</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="/_sdk/element_sdk.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&amp;family=DM+Sans:wght@300;400;500;600&amp;display=swap" rel="stylesheet">
+  <style>
+    body {
+      box-sizing: border-box;
+    }
+    
+    .font-serif { font-family: 'Cormorant Garamond', Georgia, serif; }
+    .font-sans { font-family: 'DM Sans', system-ui, sans-serif; }
+    
+    html { scroll-behavior: smooth; }
+    
+    @keyframes float {
+      0%, 100% { transform: translateY(0) rotate(0deg); }
+      50% { transform: translateY(-20px) rotate(3deg); }
+    }
+    
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    
+    @keyframes pulse-soft {
+      0%, 100% { opacity: 0.4; }
+      50% { opacity: 0.7; }
+    }
+    
+    @keyframes shimmer {
+      0% { background-position: -200% 0; }
+      100% { background-position: 200% 0; }
+    }
+    
+    @keyframes gradient-shift {
+      0%, 100% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+    }
+    
+    @keyframes scale-in {
+      from { transform: scale(0.8); opacity: 0; }
+      to { transform: scale(1); opacity: 1; }
+    }
+    
+    @keyframes slide-up {
+      from { transform: translateY(100px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+    
+    @keyframes rotate-slow {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+    
+    @keyframes bounce-gentle {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+    
+    @keyframes slide-in-left {
+      from { transform: translateX(-50px); opacity: 0; }
+      to { transform: translateX(0); opacity: 1; }
+    }
+    
+    @keyframes slide-in-right {
+      from { transform: translateX(50px); opacity: 0; }
+      to { transform: translateX(0); opacity: 1; }
+    }
+    
+    @keyframes zoom-pulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+    }
+    
+    @keyframes blob-morph {
+      0%, 100% { border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%; transform: rotate(0deg) scale(1); }
+      50% { border-radius: 30% 60% 70% 40% / 50% 60% 30% 60%; transform: rotate(180deg) scale(1.1); }
+    }
+    
+    .animate-float { animation: float 6s ease-in-out infinite; }
+    .animate-fade-in { animation: fadeInUp 0.8s ease-out forwards; }
+    .animate-pulse-soft { animation: pulse-soft 4s ease-in-out infinite; }
+    .animate-gradient { animation: gradient-shift 8s ease infinite; background-size: 200% 200%; }
+    .animate-rotate { animation: rotate-slow 20s linear infinite; }
+    .animate-bounce-gentle { animation: bounce-gentle 3s ease-in-out infinite; }
+    .animate-slide-left { animation: slide-in-left 0.8s ease-out forwards; }
+    .animate-slide-right { animation: slide-in-right 0.8s ease-out forwards; }
+    .animate-zoom-pulse { animation: zoom-pulse 4s ease-in-out infinite; }
+    .animate-blob-morph { animation: blob-morph 8s ease-in-out infinite; }
+    
+    /* Scroll-triggered animations */
+    .scroll-animate {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: all 0.8s ease-out;
+    }
+    
+    .scroll-animate.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    
+    .shimmer-gold {
+      background: linear-gradient(90deg, transparent 0%, rgba(212,175,55,0.3) 50%, transparent 100%);
+      background-size: 200% 100%;
+      animation: shimmer 3s infinite;
+    }
+    
+    .gradient-gold {
+      background: linear-gradient(135deg, #D4AF37 0%, #F4E4BC 50%, #D4AF37 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    
+    .card-hover {
+      transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+      position: relative;
+      overflow: hidden;
+    }
+    .card-hover::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(91, 124, 79, 0.1), rgba(212, 175, 55, 0.1));
+      opacity: 0;
+      transition: opacity 0.5s;
+    }
+    .card-hover:hover::before {
+      opacity: 1;
+    }
+    .card-hover:hover {
+      transform: translateY(-12px) scale(1.02);
+      box-shadow: 0 30px 60px -15px rgba(91, 124, 79, 0.3);
+    }
+    
+    .btn-primary {
+      background: linear-gradient(135deg, #5B7C4F 0%, #7A9E6B 100%);
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      position: relative;
+      overflow: hidden;
+    }
+    .btn-primary::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(255,255,255,0.2), transparent);
+      transform: translateX(-100%);
+      transition: transform 0.6s;
+    }
+    .btn-primary:hover::before {
+      transform: translateX(100%);
+    }
+    .btn-primary:hover {
+      background: linear-gradient(135deg, #4A6B3E 0%, #6B8F5C 100%);
+      transform: translateY(-3px) scale(1.05);
+      box-shadow: 0 15px 40px -10px rgba(91, 124, 79, 0.6);
+    }
+    
+    .glass-effect {
+      background: rgba(255, 255, 255, 0.7);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+    }
+    
+    .section-divider {
+      height: 1px;
+      background: linear-gradient(90deg, transparent, #D4AF37, transparent);
+    }
+    
+    .ornament::before,
+    .ornament::after {
+      content: '✦';
+      color: #D4AF37;
+      margin: 0 1rem;
+      font-size: 0.75rem;
+    }
+    
+    .step-connector {
+      position: absolute;
+      top: 50%;
+      left: 100%;
+      width: 60px;
+      height: 2px;
+      background: linear-gradient(90deg, #D4AF37, transparent);
+    }
+    
+    @media (max-width: 768px) {
+      .step-connector { display: none; }
+    }
+    
+    .testimonial-card {
+      background: linear-gradient(145deg, rgba(250, 248, 245, 0.95) 0%, rgba(245, 240, 232, 0.95) 100%);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.5);
+    }
+    
+    .faq-item {
+      border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+    }
+    
+    .faq-content {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease-out;
+    }
+    
+    .faq-content.open {
+      max-height: 500px;
+    }
+    
+    .blob {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(60px);
+      opacity: 0.3;
+      animation: float 8s ease-in-out infinite;
+    }
+    
+    .blob-morph-shape {
+      animation: blob-morph 10s ease-in-out infinite;
+    }
+    
+    .nav-glass {
+      background: rgba(250, 248, 245, 0.85);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      box-shadow: 0 4px 30px rgba(0, 0, 0, 0.05);
+    }
+    
+    .modern-card {
+      background: linear-gradient(145deg, #ffffff, #fafafa);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.8);
+    }
+    
+    .glow-effect {
+      box-shadow: 0 0 40px rgba(91, 124, 79, 0.3);
+    }
+  </style>
+  <style>@view-transition { navigation: auto; }</style>
+  <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
+ </head>
+ <body class="h-full font-sans bg-stone-50 text-stone-800 overflow-auto">
+  <div id="app" class="w-full h-full overflow-auto"><!-- Navigation -->
+   <nav class="fixed top-0 left-0 right-0 z-50 nav-glass border-b border-white/50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+     <div class="flex items-center justify-between h-16 md:h-20">
+      <div class="flex items-center gap-3">
+       <div class="w-10 h-10 rounded-full bg-gradient-to-br from-green-700 to-green-600 flex items-center justify-center">
+        <svg class="w-6 h-6 text-amber-200" viewbox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z" />
+        </svg>
+       </div><span class="font-serif text-2xl font-semibold text-stone-800">Vaidya</span>
+      </div>
+      <div class="hidden md:flex items-center gap-8"><a href="#products" class="text-stone-600 hover:text-green-700 transition-colors text-sm font-medium">Products</a> <a href="#knowledge" class="text-stone-600 hover:text-green-700 transition-colors text-sm font-medium">Knowledge</a> <a href="#benefits" class="text-stone-600 hover:text-green-700 transition-colors text-sm font-medium">Benefits</a> <a href="#testimonials" class="text-stone-600 hover:text-green-700 transition-colors text-sm font-medium">Stories</a> <a href="#faq" class="text-stone-600 hover:text-green-700 transition-colors text-sm font-medium">FAQ</a>
+      </div><button class="btn-primary px-6 py-2.5 rounded-full text-white text-sm font-medium shadow-lg"> Shop Now </button>
+     </div>
+    </div>
+   </nav><!-- Hero Section -->
+   <section class="relative min-h-screen flex items-center pt-20 overflow-hidden animate-gradient" style="background: linear-gradient(135deg, #FAF8F5 0%, #F0E8DC 25%, #E8DFC8 50%, #F5EEE5 75%, #FAF8F5 100%);"><!-- Modern Blob Backgrounds -->
+    <div class="blob blob-morph-shape" style="width: 400px; height: 400px; background: #5B7C4F; top: 10%; left: -10%;"></div>
+    <div class="blob blob-morph-shape" style="width: 350px; height: 350px; background: #D4AF37; bottom: 10%; right: -5%; animation-delay: 2s;"></div>
+    <div class="blob blob-morph-shape" style="width: 300px; height: 300px; background: #8B5A2B; top: 50%; right: 10%; animation-delay: 4s;"></div><!-- Decorative Elements -->
+    <div class="absolute inset-0 overflow-hidden pointer-events-none"><!-- Floating Leaves -->
+     <div class="absolute top-20 left-10 w-24 h-24 opacity-20 animate-float animate-rotate" style="animation-delay: 0s;">
+      <svg viewbox="0 0 100 100" fill="#5B7C4F"><path d="M50 5C30 5 15 30 15 50c0 25 20 45 35 45s35-20 35-45C85 30 70 5 50 5zm0 80c-10 0-25-15-25-35s15-35 25-35 25 15 25 35-15 35-25 35z" />
+      </svg>
+     </div>
+     <div class="absolute top-40 right-20 w-16 h-16 opacity-15 animate-float animate-zoom-pulse" style="animation-delay: 2s;">
+      <svg viewbox="0 0 100 100" fill="#8B5A2B"><circle cx="50" cy="50" r="40" />
+      </svg>
+     </div>
+     <div class="absolute bottom-40 left-1/4 w-20 h-20 opacity-10 animate-float animate-rotate" style="animation-delay: 4s;">
+      <svg viewbox="0 0 100 100" fill="#D4AF37"><polygon points="50,5 61,40 98,40 68,62 79,97 50,75 21,97 32,62 2,40 39,40" />
+      </svg>
+     </div><!-- Golden Shimmer Lines -->
+     <div class="absolute top-1/3 left-0 right-0 h-px shimmer-gold"></div>
+     <div class="absolute top-2/3 left-0 right-0 h-px shimmer-gold"></div>
+    </div>
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 relative z-10">
+     <div class="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center"><!-- Hero Content -->
+      <div class="text-center lg:text-left">
+       <div class="inline-flex items-center gap-2 px-4 py-2 bg-green-50 rounded-full mb-6 animate-fade-in" style="animation-delay: 0.2s;"><span class="w-2 h-2 rounded-full bg-green-600"></span> <span class="text-green-700 text-sm font-medium">5000+ Years of Wisdom</span>
+       </div>
+       <h1 id="hero-title" class="font-serif text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-semibold text-stone-800 leading-tight mb-6 animate-fade-in" style="animation-delay: 0.4s;">Ancient Wisdom for <span class="gradient-gold">Modern Wellness</span></h1>
+       <p id="hero-subtitle" class="text-lg sm:text-xl text-stone-600 leading-relaxed mb-8 max-w-xl mx-auto lg:mx-0 animate-fade-in" style="animation-delay: 0.6s;">Discover the healing power of Ayurveda through authentic herbal products and sacred knowledge, carefully curated for your journey to holistic health.</p>
+       <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start animate-fade-in" style="animation-delay: 0.8s;"><button id="cta-button" class="btn-primary px-8 py-4 rounded-full text-white font-medium text-lg shadow-xl"> Begin Your Journey </button> <button class="px-8 py-4 rounded-full border-2 border-stone-300 text-stone-700 font-medium text-lg hover:border-green-600 hover:text-green-700 transition-all"> Explore Knowledge </button>
+       </div><!-- Trust Badges -->
+       <div class="flex items-center gap-8 mt-12 justify-center lg:justify-start animate-fade-in" style="animation-delay: 1s;">
+        <div class="text-center">
+         <div class="text-2xl font-serif font-bold text-green-700">
+          100%
+         </div>
+         <div class="text-xs text-stone-500 uppercase tracking-wider">
+          Natural
+         </div>
+        </div>
+        <div class="w-px h-10 bg-stone-300"></div>
+        <div class="text-center">
+         <div class="text-2xl font-serif font-bold text-green-700">
+          50K+
+         </div>
+         <div class="text-xs text-stone-500 uppercase tracking-wider">
+          Happy Souls
+         </div>
+        </div>
+        <div class="w-px h-10 bg-stone-300"></div>
+        <div class="text-center">
+         <div class="text-2xl font-serif font-bold text-green-700">
+          GMP
+         </div>
+         <div class="text-xs text-stone-500 uppercase tracking-wider">
+          Certified
+         </div>
+        </div>
+       </div>
+      </div><!-- Hero Visual -->
+      <div class="relative flex justify-center items-center">
+       <div class="relative w-80 h-80 sm:w-96 sm:h-96"><!-- Main Circle -->
+        <div class="absolute inset-0 rounded-full bg-gradient-to-br from-green-100 to-amber-50 animate-pulse-soft"></div>
+        <div class="absolute inset-4 rounded-full bg-gradient-to-br from-amber-50 to-green-50"></div><!-- Mortar & Pestle SVG -->
+        <div class="absolute inset-0 flex items-center justify-center">
+         <svg class="w-48 h-48 sm:w-64 sm:h-64" viewbox="0 0 200 200" fill="none"><!-- Bowl --> <ellipse cx="100" cy="140" rx="70" ry="25" fill="#8B5A2B" /> <ellipse cx="100" cy="135" rx="65" ry="22" fill="#A0714F" /> <path d="M35 135 Q35 170 100 170 Q165 170 165 135 L165 140 Q165 175 100 175 Q35 175 35 140 Z" fill="#6B4423" /> <!-- Herbs in Bowl --> <ellipse cx="85" cy="130" rx="12" ry="8" fill="#5B7C4F" /> <ellipse cx="110" cy="128" rx="10" ry="7" fill="#7A9E6B" /> <ellipse cx="95" cy="125" rx="8" ry="5" fill="#4A6B3E" /> <!-- Pestle --> <rect x="120" y="40" width="20" height="100" rx="10" fill="#D4AF37" transform="rotate(25, 130, 90)" /> <ellipse cx="135" cy="50" rx="12" ry="8" fill="#F4E4BC" transform="rotate(25, 135, 50)" /> <!-- Decorative Leaves --> <path d="M40 100 Q50 80 60 100 Q50 90 40 100" fill="#5B7C4F" /> <path d="M150 90 Q160 70 170 90 Q160 80 150 90" fill="#7A9E6B" /> <!-- Floating Herbs --> <circle cx="60" cy="60" r="8" fill="#5B7C4F" opacity="0.6" /> <circle cx="150" cy="50" r="6" fill="#7A9E6B" opacity="0.5" /> <circle cx="45" cy="80" r="5" fill="#8B5A2B" opacity="0.4" />
+         </svg>
+        </div><!-- Floating Elements -->
+        <div class="absolute -top-4 -right-4 w-16 h-16 bg-amber-100 rounded-full flex items-center justify-center shadow-lg animate-bounce-gentle"><span class="text-2xl">🌿</span>
+        </div>
+        <div class="absolute -bottom-2 -left-6 w-14 h-14 bg-green-100 rounded-full flex items-center justify-center shadow-lg animate-bounce-gentle" style="animation-delay: 1s;"><span class="text-xl">🪷</span>
+        </div>
+        <div class="absolute top-1/2 -right-8 w-12 h-12 bg-amber-50 rounded-full flex items-center justify-center shadow-lg animate-bounce-gentle" style="animation-delay: 2s;"><span class="text-lg">✨</span>
+        </div>
+       </div>
+      </div>
+     </div>
+    </div><!-- Scroll Indicator -->
+    <div class="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 animate-bounce"><span class="text-xs text-stone-500 uppercase tracking-widest">Scroll</span>
+     <svg class="w-5 h-5 text-stone-400" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+     </svg>
+    </div>
+   </section><!-- Section Divider -->
+   <div class="section-divider max-w-4xl mx-auto"></div><!-- Products Section -->
+   <section id="products" class="py-20 lg:py-32 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+     <div class="text-center mb-16 scroll-animate"><span class="ornament text-stone-400 text-sm uppercase tracking-widest">Handcrafted with Care</span>
+      <h2 id="products-title" class="font-serif text-3xl sm:text-4xl lg:text-5xl font-semibold text-stone-800 mt-4 mb-6">Our Healing Collection</h2>
+      <p class="text-stone-600 max-w-2xl mx-auto text-lg">Each product is formulated using time-honored recipes and the purest natural ingredients</p>
+     </div>
+     <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8"><!-- Product 1 -->
+      <div class="card-hover modern-card rounded-3xl p-6 scroll-animate" style="animation-delay: 0.1s;">
+       <div class="w-full aspect-square bg-gradient-to-br from-green-50 to-amber-50 rounded-2xl mb-6 flex items-center justify-center relative overflow-hidden">
+        <div class="absolute inset-0 bg-white opacity-50 blur-xl"></div>
+        <svg class="w-24 h-24 relative z-10" viewbox="0 0 100 100" fill="none"><rect x="30" y="20" width="40" height="60" rx="5" fill="#8B5A2B" /> <rect x="35" y="25" width="30" height="50" rx="3" fill="#A0714F" /> <circle cx="50" cy="15" r="8" fill="#D4AF37" /> <path d="M40 45 L60 45 M40 55 L55 55" stroke="#5B7C4F" stroke-width="3" stroke-linecap="round" />
+        </svg>
+       </div><span class="text-xs text-green-600 font-semibold uppercase tracking-wider">Immunity</span>
+       <h3 class="font-serif text-xl font-semibold text-stone-800 mt-2 mb-2">Chyawanprash Gold</h3>
+       <p class="text-stone-500 text-sm mb-4">Traditional immunity booster with 48 herbs</p>
+       <div class="flex items-center justify-between"><span class="font-bold text-stone-800 text-lg">₹599</span> <button class="w-12 h-12 rounded-2xl bg-gradient-to-br from-green-600 to-green-500 text-white flex items-center justify-center hover:from-green-700 hover:to-green-600 transition-all hover:scale-110 glow-effect">
+         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
+         </svg></button>
+       </div>
+      </div><!-- Product 2 -->
+      <div class="card-hover modern-card rounded-3xl p-6 scroll-animate" style="animation-delay: 0.2s;">
+       <div class="w-full aspect-square bg-gradient-to-br from-amber-50 to-green-50 rounded-2xl mb-6 flex items-center justify-center relative overflow-hidden">
+        <div class="absolute top-3 right-3 bg-gradient-to-r from-amber-500 to-amber-600 text-white text-xs px-3 py-1.5 rounded-full font-semibold shadow-lg z-10">
+         ✨ Bestseller
+        </div>
+        <div class="absolute inset-0 bg-white opacity-50 blur-xl"></div>
+        <svg class="w-24 h-24 relative z-10" viewbox="0 0 100 100" fill="none"><ellipse cx="50" cy="70" rx="30" ry="15" fill="#5B7C4F" /> <ellipse cx="50" cy="67" rx="27" ry="12" fill="#7A9E6B" /> <path d="M50 20 Q60 40 50 55 Q40 40 50 20" fill="#5B7C4F" /> <path d="M45 30 Q35 45 45 55" fill="none" stroke="#4A6B3E" stroke-width="2" />
+        </svg>
+       </div><span class="text-xs text-green-600 font-semibold uppercase tracking-wider">Digestion</span>
+       <h3 class="font-serif text-xl font-semibold text-stone-800 mt-2 mb-2">Triphala Churna</h3>
+       <p class="text-stone-500 text-sm mb-4">Three-fruit blend for digestive wellness</p>
+       <div class="flex items-center justify-between"><span class="font-bold text-stone-800 text-lg">₹299</span> <button class="w-12 h-12 rounded-2xl bg-gradient-to-br from-green-600 to-green-500 text-white flex items-center justify-center hover:from-green-700 hover:to-green-600 transition-all hover:scale-110 glow-effect">
+         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
+         </svg></button>
+       </div>
+      </div><!-- Product 3 -->
+      <div class="card-hover modern-card rounded-3xl p-6 scroll-animate" style="animation-delay: 0.3s;">
+       <div class="w-full aspect-square bg-gradient-to-br from-green-50 to-stone-50 rounded-2xl mb-6 flex items-center justify-center relative overflow-hidden">
+        <div class="absolute inset-0 bg-white opacity-50 blur-xl"></div>
+        <svg class="w-24 h-24 relative z-10" viewbox="0 0 100 100" fill="none"><rect x="25" y="30" width="50" height="45" rx="8" fill="#D4AF37" /> <rect x="30" y="35" width="40" height="35" rx="5" fill="#F4E4BC" /> <circle cx="50" cy="25" r="10" fill="#8B5A2B" /> <path d="M40 50 Q50 45 60 50" stroke="#5B7C4F" stroke-width="3" stroke-linecap="round" /> <circle cx="45" cy="55" r="4" fill="#5B7C4F" /> <circle cx="55" cy="55" r="4" fill="#5B7C4F" />
+        </svg>
+       </div><span class="text-xs text-green-600 font-semibold uppercase tracking-wider">Mind</span>
+       <h3 class="font-serif text-xl font-semibold text-stone-800 mt-2 mb-2">Brahmi Capsules</h3>
+       <p class="text-stone-500 text-sm mb-4">Cognitive support &amp; mental clarity</p>
+       <div class="flex items-center justify-between"><span class="font-bold text-stone-800 text-lg">₹449</span> <button class="w-12 h-12 rounded-2xl bg-gradient-to-br from-green-600 to-green-500 text-white flex items-center justify-center hover:from-green-700 hover:to-green-600 transition-all hover:scale-110 glow-effect">
+         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
+         </svg></button>
+       </div>
+      </div><!-- Product 4 -->
+      <div class="card-hover modern-card rounded-3xl p-6 scroll-animate" style="animation-delay: 0.4s;">
+       <div class="w-full aspect-square bg-gradient-to-br from-amber-50 to-stone-50 rounded-2xl mb-6 flex items-center justify-center relative overflow-hidden">
+        <div class="absolute inset-0 bg-white opacity-50 blur-xl"></div>
+        <svg class="w-24 h-24 relative z-10" viewbox="0 0 100 100" fill="none"><path d="M50 15 Q70 25 70 50 Q70 75 50 85 Q30 75 30 50 Q30 25 50 15" fill="#5B7C4F" /> <path d="M50 20 Q65 28 65 50 Q65 72 50 80 Q35 72 35 50 Q35 28 50 20" fill="#7A9E6B" /> <path d="M50 25 L50 75 M40 40 L60 40 M42 55 L58 55" stroke="#4A6B3E" stroke-width="2" />
+        </svg>
+       </div><span class="text-xs text-green-600 font-semibold uppercase tracking-wider">Stress</span>
+       <h3 class="font-serif text-xl font-semibold text-stone-800 mt-2 mb-2">Ashwagandha Root</h3>
+       <p class="text-stone-500 text-sm mb-4">Adaptogenic stress relief formula</p>
+       <div class="flex items-center justify-between"><span class="font-bold text-stone-800 text-lg">₹399</span> <button class="w-12 h-12 rounded-2xl bg-gradient-to-br from-green-600 to-green-500 text-white flex items-center justify-center hover:from-green-700 hover:to-green-600 transition-all hover:scale-110 glow-effect">
+         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
+         </svg></button>
+       </div>
+      </div>
+     </div>
+     <div class="text-center mt-12"><button class="px-8 py-3 rounded-full border-2 border-green-600 text-green-700 font-medium hover:bg-green-50 transition-colors"> View All Products → </button>
+     </div>
+    </div>
+   </section><!-- Knowledge Library Section -->
+   <section id="knowledge" class="py-20 lg:py-32" style="background: linear-gradient(180deg, #F5EEE5 0%, #FAF8F5 100%);">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+     <div class="text-center mb-16 scroll-animate"><span class="ornament text-stone-400 text-sm uppercase tracking-widest">Digital Wisdom</span>
+      <h2 id="knowledge-title" class="font-serif text-3xl sm:text-4xl lg:text-5xl font-semibold text-stone-800 mt-4 mb-6">Sacred Knowledge Library</h2>
+      <p class="text-stone-600 max-w-2xl mx-auto text-lg">Unlock ancient healing wisdom through our carefully curated collection of Ayurvedic guides and remedy PDFs</p>
+     </div><!-- PDF Products Grid -->
+     <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-8 mb-20"><!-- PDF 1 -->
+      <div class="card-hover modern-card rounded-3xl overflow-hidden shadow-xl scroll-animate" style="animation-delay: 0.1s;">
+       <div class="aspect-[4/3] bg-gradient-to-br from-green-100 via-green-50 to-amber-50 flex items-center justify-center relative overflow-hidden">
+        <div class="absolute inset-0 bg-white opacity-30 blur-2xl"></div>
+        <div class="absolute top-4 left-4 bg-gradient-to-r from-amber-500 to-amber-600 text-white text-xs px-3 py-1.5 rounded-full font-semibold shadow-lg z-10">
+         ⚡ Popular
+        </div>
+        <svg class="w-32 h-32 relative z-10" viewbox="0 0 100 100" fill="none"><rect x="20" y="10" width="60" height="80" rx="4" fill="#FAF8F5" stroke="#D4AF37" stroke-width="2" /> <rect x="25" y="20" width="30" height="4" rx="2" fill="#5B7C4F" /> <rect x="25" y="30" width="50" height="2" rx="1" fill="#E5E7EB" /> <rect x="25" y="36" width="45" height="2" rx="1" fill="#E5E7EB" /> <rect x="25" y="42" width="50" height="2" rx="1" fill="#E5E7EB" /> <rect x="25" y="52" width="20" height="20" rx="2" fill="#5B7C4F" opacity="0.2" /> <path d="M35 62 L30 67 L32 62 L28 62 L35 55 L33 60 L37 60 Z" fill="#5B7C4F" /> <rect x="50" y="54" width="25" height="2" rx="1" fill="#E5E7EB" /> <rect x="50" y="60" width="20" height="2" rx="1" fill="#E5E7EB" /> <rect x="50" y="66" width="22" height="2" rx="1" fill="#E5E7EB" />
+        </svg>
+       </div>
+       <div class="p-6 bg-white/80 backdrop-blur-sm">
+        <div class="flex items-center gap-2 mb-3"><span class="text-xs bg-green-100 text-green-700 px-3 py-1 rounded-full font-semibold">48 Pages</span> <span class="text-xs bg-amber-100 text-amber-700 px-3 py-1 rounded-full font-semibold">Beginner</span>
+        </div>
+        <h3 class="font-serif text-xl font-semibold text-stone-800 mb-2">Complete Dosha Guide</h3>
+        <p class="text-stone-500 text-sm mb-4">Discover your unique mind-body type and personalized wellness recommendations</p>
+        <div class="flex items-center justify-between">
+         <div><span class="text-2xl font-bold text-stone-800">₹199</span> <span class="text-stone-400 line-through ml-2 text-sm">₹499</span>
+         </div><button class="btn-primary px-6 py-2.5 rounded-xl text-white text-sm font-semibold shadow-lg"> Get PDF </button>
+        </div>
+       </div>
+      </div><!-- PDF 2 -->
+      <div class="card-hover modern-card rounded-3xl overflow-hidden shadow-xl scroll-animate" style="animation-delay: 0.2s;">
+       <div class="aspect-[4/3] bg-gradient-to-br from-amber-100 via-amber-50 to-green-50 flex items-center justify-center relative overflow-hidden">
+        <div class="absolute inset-0 bg-white opacity-30 blur-2xl"></div>
+        <svg class="w-32 h-32 relative z-10" viewbox="0 0 100 100" fill="none"><rect x="20" y="10" width="60" height="80" rx="4" fill="#FAF8F5" stroke="#8B5A2B" stroke-width="2" /> <rect x="25" y="20" width="35" height="4" rx="2" fill="#8B5A2B" /> <rect x="25" y="30" width="50" height="2" rx="1" fill="#E5E7EB" /> <rect x="25" y="36" width="45" height="2" rx="1" fill="#E5E7EB" /> <circle cx="50" cy="60" r="15" fill="#D4AF37" opacity="0.2" /> <path d="M50 50 L50 70 M40 60 L60 60" stroke="#D4AF37" stroke-width="3" stroke-linecap="round" />
+        </svg>
+       </div>
+       <div class="p-6 bg-white/80 backdrop-blur-sm">
+        <div class="flex items-center gap-2 mb-3"><span class="text-xs bg-green-100 text-green-700 px-3 py-1 rounded-full font-semibold">120 Pages</span> <span class="text-xs bg-stone-100 text-stone-700 px-3 py-1 rounded-full font-semibold">Advanced</span>
+        </div>
+        <h3 class="font-serif text-xl font-semibold text-stone-800 mb-2">Home Remedies Encyclopedia</h3>
+        <p class="text-stone-500 text-sm mb-4">100+ traditional remedies for common ailments using kitchen ingredients</p>
+        <div class="flex items-center justify-between">
+         <div><span class="text-2xl font-bold text-stone-800">₹349</span> <span class="text-stone-400 line-through ml-2 text-sm">₹799</span>
+         </div><button class="btn-primary px-6 py-2.5 rounded-xl text-white text-sm font-semibold shadow-lg"> Get PDF </button>
+        </div>
+       </div>
+      </div><!-- PDF 3 -->
+      <div class="card-hover modern-card rounded-3xl overflow-hidden shadow-xl scroll-animate" style="animation-delay: 0.3s;">
+       <div class="aspect-[4/3] bg-gradient-to-br from-stone-100 via-stone-50 to-green-50 flex items-center justify-center relative overflow-hidden">
+        <div class="absolute inset-0 bg-white opacity-30 blur-2xl"></div>
+        <svg class="w-32 h-32 relative z-10" viewbox="0 0 100 100" fill="none"><rect x="20" y="10" width="60" height="80" rx="4" fill="#FAF8F5" stroke="#5B7C4F" stroke-width="2" /> <rect x="25" y="20" width="40" height="4" rx="2" fill="#5B7C4F" /> <circle cx="38" cy="50" r="12" fill="#5B7C4F" opacity="0.2" /> <circle cx="62" cy="50" r="12" fill="#D4AF37" opacity="0.2" /> <path d="M38 45 L38 55 M33 50 L43 50" stroke="#5B7C4F" stroke-width="2" stroke-linecap="round" /> <path d="M62 45 L62 55 M57 50 L67 50" stroke="#D4AF37" stroke-width="2" stroke-linecap="round" /> <rect x="25" y="70" width="50" height="2" rx="1" fill="#E5E7EB" /> <rect x="25" y="76" width="40" height="2" rx="1" fill="#E5E7EB" />
+        </svg>
+       </div>
+       <div class="p-6 bg-white/80 backdrop-blur-sm">
+        <div class="flex items-center gap-2 mb-3"><span class="text-xs bg-green-100 text-green-700 px-3 py-1 rounded-full font-semibold">85 Pages</span> <span class="text-xs bg-amber-100 text-amber-700 px-3 py-1 rounded-full font-semibold">Intermediate</span>
+        </div>
+        <h3 class="font-serif text-xl font-semibold text-stone-800 mb-2">Ayurvedic Diet Mastery</h3>
+        <p class="text-stone-500 text-sm mb-4">Seasonal eating guides, recipes, and food combining principles</p>
+        <div class="flex items-center justify-between">
+         <div><span class="text-2xl font-bold text-stone-800">₹249</span> <span class="text-stone-400 line-through ml-2 text-sm">₹599</span>
+         </div><button class="btn-primary px-6 py-2.5 rounded-xl text-white text-sm font-semibold shadow-lg"> Get PDF </button>
+        </div>
+       </div>
+      </div>
+     </div><!-- How It Works -->
+     <div class="bg-white rounded-3xl p-8 lg:p-12 shadow-sm border border-stone-100">
+      <h3 class="font-serif text-2xl lg:text-3xl font-semibold text-stone-800 text-center mb-12">How It Works</h3>
+      <div class="grid md:grid-cols-3 gap-8 lg:gap-12"><!-- Step 1 -->
+       <div class="relative text-center">
+        <div class="w-20 h-20 mx-auto bg-gradient-to-br from-green-100 to-green-50 rounded-2xl flex items-center justify-center mb-6 relative"><span class="absolute -top-2 -left-2 w-8 h-8 bg-green-600 text-white rounded-full flex items-center justify-center text-sm font-bold">1</span>
+         <svg class="w-10 h-10 text-green-600" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+         </svg>
+        </div>
+        <h4 class="font-serif text-lg font-semibold text-stone-800 mb-2">Select Your PDF</h4>
+        <p class="text-stone-500 text-sm">Browse our curated collection and choose the knowledge that resonates with you</p>
+        <div class="step-connector hidden md:block"></div>
+       </div><!-- Step 2 -->
+       <div class="relative text-center">
+        <div class="w-20 h-20 mx-auto bg-gradient-to-br from-amber-100 to-amber-50 rounded-2xl flex items-center justify-center mb-6 relative"><span class="absolute -top-2 -left-2 w-8 h-8 bg-amber-500 text-white rounded-full flex items-center justify-center text-sm font-bold">2</span>
+         <svg class="w-10 h-10 text-amber-600" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+         </svg>
+        </div>
+        <h4 class="font-serif text-lg font-semibold text-stone-800 mb-2">Secure Payment</h4>
+        <p class="text-stone-500 text-sm">Quick checkout with UPI, cards, or net banking — 100% secure &amp; encrypted</p>
+        <div class="step-connector hidden md:block"></div>
+       </div><!-- Step 3 -->
+       <div class="text-center">
+        <div class="w-20 h-20 mx-auto bg-gradient-to-br from-green-100 to-amber-50 rounded-2xl flex items-center justify-center mb-6 relative"><span class="absolute -top-2 -left-2 w-8 h-8 bg-green-600 text-white rounded-full flex items-center justify-center text-sm font-bold">3</span>
+         <svg class="w-10 h-10 text-green-600" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+         </svg>
+        </div>
+        <h4 class="font-serif text-lg font-semibold text-stone-800 mb-2">Instant Download</h4>
+        <p class="text-stone-500 text-sm">Get immediate access — your PDF downloads automatically after payment</p>
+       </div>
+      </div>
+      <div class="mt-12 flex items-center justify-center gap-6 flex-wrap">
+       <div class="flex items-center gap-2 text-stone-500 text-sm">
+        <svg class="w-5 h-5 text-green-600" fill="currentColor" viewbox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+        </svg> Instant Delivery
+       </div>
+       <div class="flex items-center gap-2 text-stone-500 text-sm">
+        <svg class="w-5 h-5 text-green-600" fill="currentColor" viewbox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+        </svg> Lifetime Access
+       </div>
+       <div class="flex items-center gap-2 text-stone-500 text-sm">
+        <svg class="w-5 h-5 text-green-600" fill="currentColor" viewbox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+        </svg> 256-bit Encryption
+       </div>
+      </div>
+     </div>
+    </div>
+   </section><!-- Benefits Section -->
+   <section id="benefits" class="py-20 lg:py-32 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+     <div class="grid lg:grid-cols-2 gap-16 items-center"><!-- Benefits Visual -->
+      <div class="relative">
+       <div class="aspect-square max-w-lg mx-auto relative"><!-- Central Circle -->
+        <div class="absolute inset-0 rounded-full bg-gradient-to-br from-green-50 to-amber-50"></div><!-- Lotus SVG -->
+        <div class="absolute inset-0 flex items-center justify-center">
+         <svg class="w-48 h-48" viewbox="0 0 200 200" fill="none"><!-- Lotus Petals --> <path d="M100 50 Q120 80 100 120 Q80 80 100 50" fill="#5B7C4F" /> <path d="M60 70 Q90 90 80 130 Q50 100 60 70" fill="#7A9E6B" /> <path d="M140 70 Q110 90 120 130 Q150 100 140 70" fill="#7A9E6B" /> <path d="M40 100 Q70 110 70 150 Q30 130 40 100" fill="#8BA67D" /> <path d="M160 100 Q130 110 130 150 Q170 130 160 100" fill="#8BA67D" /> <!-- Center --> <circle cx="100" cy="115" r="15" fill="#D4AF37" /> <circle cx="100" cy="115" r="8" fill="#F4E4BC" /> <!-- Water --> <ellipse cx="100" cy="160" rx="60" ry="15" fill="#7A9E6B" opacity="0.3" />
+         </svg>
+        </div><!-- Floating Benefit Icons -->
+        <div class="absolute top-8 left-8 w-16 h-16 bg-white rounded-2xl shadow-lg flex items-center justify-center animate-float"><span class="text-2xl">🌱</span>
+        </div>
+        <div class="absolute top-12 right-4 w-14 h-14 bg-white rounded-2xl shadow-lg flex items-center justify-center animate-float" style="animation-delay: 1s;"><span class="text-xl">🧘</span>
+        </div>
+        <div class="absolute bottom-20 left-4 w-14 h-14 bg-white rounded-2xl shadow-lg flex items-center justify-center animate-float" style="animation-delay: 2s;"><span class="text-xl">💚</span>
+        </div>
+        <div class="absolute bottom-8 right-8 w-16 h-16 bg-white rounded-2xl shadow-lg flex items-center justify-center animate-float" style="animation-delay: 3s;"><span class="text-2xl">✨</span>
+        </div>
+       </div>
+      </div><!-- Benefits Content -->
+      <div><span class="ornament text-stone-400 text-sm uppercase tracking-widest">Why Choose Ayurveda</span>
+       <h2 id="benefits-title" class="font-serif text-3xl sm:text-4xl lg:text-5xl font-semibold text-stone-800 mt-4 mb-8">The Ayurvedic Difference</h2>
+       <div class="space-y-6">
+        <div class="flex gap-4 p-4 rounded-2xl hover:bg-stone-50 transition-colors">
+         <div class="w-12 h-12 bg-green-100 rounded-xl flex items-center justify-center flex-shrink-0">
+          <svg class="w-6 h-6 text-green-600" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+          </svg>
+         </div>
+         <div>
+          <h4 class="font-serif text-lg font-semibold text-stone-800 mb-1">100% Natural &amp; Pure</h4>
+          <p class="text-stone-500 text-sm">Every ingredient is sourced from nature, free from chemicals and synthetic additives</p>
+         </div>
+        </div>
+        <div class="flex gap-4 p-4 rounded-2xl hover:bg-stone-50 transition-colors">
+         <div class="w-12 h-12 bg-amber-100 rounded-xl flex items-center justify-center flex-shrink-0">
+          <svg class="w-6 h-6 text-amber-600" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+          </svg>
+         </div>
+         <div>
+          <h4 class="font-serif text-lg font-semibold text-stone-800 mb-1">5000+ Years Proven</h4>
+          <p class="text-stone-500 text-sm">Time-tested wisdom passed down through generations of Ayurvedic practitioners</p>
+         </div>
+        </div>
+        <div class="flex gap-4 p-4 rounded-2xl hover:bg-stone-50 transition-colors">
+         <div class="w-12 h-12 bg-green-100 rounded-xl flex items-center justify-center flex-shrink-0">
+          <svg class="w-6 h-6 text-green-600" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+          </svg>
+         </div>
+         <div>
+          <h4 class="font-serif text-lg font-semibold text-stone-800 mb-1">Holistic Healing</h4>
+          <p class="text-stone-500 text-sm">Treats the root cause, not just symptoms — balancing mind, body, and spirit</p>
+         </div>
+        </div>
+        <div class="flex gap-4 p-4 rounded-2xl hover:bg-stone-50 transition-colors">
+         <div class="w-12 h-12 bg-amber-100 rounded-xl flex items-center justify-center flex-shrink-0">
+          <svg class="w-6 h-6 text-amber-600" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+          </svg>
+         </div>
+         <div>
+          <h4 class="font-serif text-lg font-semibold text-stone-800 mb-1">Personalized Approach</h4>
+          <p class="text-stone-500 text-sm">Unique treatments based on your individual constitution (Prakriti)</p>
+         </div>
+        </div>
+       </div>
+      </div>
+     </div>
+    </div>
+   </section><!-- Testimonials Section -->
+   <section id="testimonials" class="py-20 lg:py-32" style="background: linear-gradient(180deg, #FAF8F5 0%, #F5EEE5 100%);">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+     <div class="text-center mb-16"><span class="ornament text-stone-400 text-sm uppercase tracking-widest">Healing Stories</span>
+      <h2 class="font-serif text-3xl sm:text-4xl lg:text-5xl font-semibold text-stone-800 mt-4 mb-6">Voices of Wellness</h2>
+     </div>
+     <div class="grid md:grid-cols-3 gap-8"><!-- Testimonial 1 -->
+      <div class="testimonial-card rounded-2xl p-8 relative">
+       <div class="absolute top-6 right-6 text-4xl text-amber-300 opacity-50">
+        "
+       </div>
+       <div class="flex items-center gap-1 mb-4">
+        <svg class="w-5 h-5 text-amber-400" fill="currentColor" viewbox="0 0 20 20">
+         <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+        </svg>
+        <svg class="w-5 h-5 text-amber-400" fill="currentColor" viewbox="0 0 20 20">
+         <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+        </svg>
+        <svg class="w-5 h-5 text-amber-400" fill="currentColor" viewbox="0 0 20 20">
+         <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+        </svg>
+        <svg class="w-5 h-5 text-amber-400" fill="currentColor" viewbox="0 0 20 20">
+         <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+        </svg>
+        <svg class="w-5 h-5 text-amber-400" fill="currentColor" viewbox="0 0 20 20">
+         <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+        </svg>
+       </div>
+       <p class="text-stone-600 mb-6 leading-relaxed">"The Dosha Guide PDF changed my life. I finally understand why certain foods never worked for me. My digestion has improved dramatically!"</p>
+       <div class="flex items-center gap-3">
+        <div class="w-12 h-12 rounded-full bg-gradient-to-br from-green-200 to-amber-200 flex items-center justify-center font-serif font-bold text-stone-700">
+         PS
+        </div>
+        <div>
+         <div class="font-semibold text-stone-800">
+          Priya Sharma
+         </div>
+         <div class="text-sm text-stone-500">
+          Delhi
+         </div>
+        </div>
+       </div>
+      </div><!-- Testimonial 2 -->
+      <div class="testimonial-card rounded-2xl p-8 relative">
+       <div class="absolute top-6 right-6 text-4xl text-amber-300 opacity-50">
+        "
+       </div>
+       <div class="flex items-center gap-1 mb-4">
+        <svg class="w-5 h-5 text-amber-400" fill="currentColor" viewbox="0 0 20 20">
+         <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+        </svg>
+        <svg class="w-5 h-5 text-amber-400" fill="currentColor" viewbox="0 0 20 20">
+         <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+        </svg>
+        <svg class="w-5 h-5 text-amber-400" fill="currentColor" viewbox="0 0 20 20">
+         <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+        </svg>
+        <svg class="w-5 h-5 text-amber-400" fill="currentColor" viewbox="0 0 20 20">
+         <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+        </svg>
+        <svg class="w-5 h-5 text-amber-400" fill="currentColor" viewbox="0 0 20 20">
+         <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+        </svg>
+       </div>
+       <p class="text-stone-600 mb-6 leading-relaxed">"Ashwagandha from Vaidya helped me manage stress naturally. After 3 months, I feel calmer and more focused. Truly life-changing!"</p>
+       <div class="flex items-center gap-3">
+        <div class="w-12 h-12 rounded-full bg-gradient-to-br from-amber-200 to-green-200 flex items-center justify-center font-serif font-bold text-stone-700">
+         RK
+        </div>
+        <div>
+         <div class="font-semibold text-stone-800">
+          Rajesh Kumar
+         </div>
+         <div class="text-sm text-stone-500">
+          Bangalore
+         </div>
+        </div>
+       </div>
+      </div><!-- Testimonial 3 -->
+      <div class="testimonial-card rounded-2xl p-8 relative">
+       <div class="absolute top-6 right-6 text-4xl text-amber-300 opacity-50">
+        "
+       </div>
+       <div class="flex items-center gap-1 mb-4">
+        <svg class="w-5 h-5 text-amber-400" fill="currentColor" viewbox="0 0 20 20">
+         <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+        </svg>
+        <svg class="w-5 h-5 text-amber-400" fill="currentColor" viewbox="0 0 20 20">
+         <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+        </svg>
+        <svg class="w-5 h-5 text-amber-400" fill="currentColor" viewbox="0 0 20 20">
+         <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+        </svg>
+        <svg class="w-5 h-5 text-amber-400" fill="currentColor" viewbox="0 0 20 20">
+         <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+        </svg>
+        <svg class="w-5 h-5 text-amber-400" fill="currentColor" viewbox="0 0 20 20">
+         <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+        </svg>
+       </div>
+       <p class="text-stone-600 mb-6 leading-relaxed">"My grandmother swears by their Triphala. We've been ordering for 2 years now. Authentic quality and excellent customer service!"</p>
+       <div class="flex items-center gap-3">
+        <div class="w-12 h-12 rounded-full bg-gradient-to-br from-green-200 to-amber-200 flex items-center justify-center font-serif font-bold text-stone-700">
+         AM
+        </div>
+        <div>
+         <div class="font-semibold text-stone-800">
+          Anita Menon
+         </div>
+         <div class="text-sm text-stone-500">
+          Kerala
+         </div>
+        </div>
+       </div>
+      </div>
+     </div>
+    </div>
+   </section><!-- FAQ Section -->
+   <section id="faq" class="py-20 lg:py-32 bg-white">
+    <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+     <div class="text-center mb-16"><span class="ornament text-stone-400 text-sm uppercase tracking-widest">Questions</span>
+      <h2 class="font-serif text-3xl sm:text-4xl lg:text-5xl font-semibold text-stone-800 mt-4 mb-6">Frequently Asked</h2>
+     </div>
+     <div class="space-y-4" id="faq-container">
+      <div class="faq-item py-4"><button class="faq-toggle w-full flex items-center justify-between text-left" onclick="toggleFaq(this)"> <span class="font-serif text-lg font-semibold text-stone-800 pr-4">How do I know my Dosha type?</span>
+        <svg class="w-6 h-6 text-stone-400 flex-shrink-0 transition-transform" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+        </svg></button>
+       <div class="faq-content">
+        <p class="text-stone-600 pt-4 pb-2">Your Dosha (Vata, Pitta, or Kapha) is determined by physical characteristics, mental tendencies, and lifestyle patterns. Our Complete Dosha Guide PDF includes a comprehensive questionnaire to help you discover your unique constitution, along with personalized recommendations.</p>
+       </div>
+      </div>
+      <div class="faq-item py-4"><button class="faq-toggle w-full flex items-center justify-between text-left" onclick="toggleFaq(this)"> <span class="font-serif text-lg font-semibold text-stone-800 pr-4">Are your products safe to use with modern medicine?</span>
+        <svg class="w-6 h-6 text-stone-400 flex-shrink-0 transition-transform" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+        </svg></button>
+       <div class="faq-content">
+        <p class="text-stone-600 pt-4 pb-2">While Ayurvedic products are generally safe, we always recommend consulting with your healthcare provider before starting any new supplement, especially if you're on medication. Our products are GMP certified and tested for purity and safety.</p>
+       </div>
+      </div>
+      <div class="faq-item py-4"><button class="faq-toggle w-full flex items-center justify-between text-left" onclick="toggleFaq(this)"> <span class="font-serif text-lg font-semibold text-stone-800 pr-4">How long before I see results?</span>
+        <svg class="w-6 h-6 text-stone-400 flex-shrink-0 transition-transform" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+        </svg></button>
+       <div class="faq-content">
+        <p class="text-stone-600 pt-4 pb-2">Ayurveda works gradually with your body's natural rhythms. Most people notice initial improvements within 2-4 weeks, with significant benefits appearing after 2-3 months of consistent use. Remember, Ayurveda focuses on long-term wellness, not quick fixes.</p>
+       </div>
+      </div>
+      <div class="faq-item py-4"><button class="faq-toggle w-full flex items-center justify-between text-left" onclick="toggleFaq(this)"> <span class="font-serif text-lg font-semibold text-stone-800 pr-4">How do PDF downloads work?</span>
+        <svg class="w-6 h-6 text-stone-400 flex-shrink-0 transition-transform" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+        </svg></button>
+       <div class="faq-content">
+        <p class="text-stone-600 pt-4 pb-2">After completing your secure payment, your PDF will automatically download to your device within seconds. You'll also receive an email with a download link valid for 7 days. Once downloaded, the PDF is yours to keep forever!</p>
+       </div>
+      </div>
+      <div class="faq-item py-4"><button class="faq-toggle w-full flex items-center justify-between text-left" onclick="toggleFaq(this)"> <span class="font-serif text-lg font-semibold text-stone-800 pr-4">Do you ship internationally?</span>
+        <svg class="w-6 h-6 text-stone-400 flex-shrink-0 transition-transform" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+        </svg></button>
+       <div class="faq-content">
+        <p class="text-stone-600 pt-4 pb-2">Yes! We ship our physical products to USA, UK, Canada, Australia, UAE, and most European countries. Shipping times vary by location (7-21 business days). Digital PDFs are available instantly worldwide with no shipping required.</p>
+       </div>
+      </div>
+     </div>
+    </div>
+   </section><!-- Contact Section -->
+   <section id="contact" class="py-20 lg:py-32" style="background: linear-gradient(180deg, #F5EEE5 0%, #EDE5D8 100%);">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+     <div class="grid lg:grid-cols-2 gap-16"><!-- Contact Info -->
+      <div><span class="ornament text-stone-400 text-sm uppercase tracking-widest">Get in Touch</span>
+       <h2 class="font-serif text-3xl sm:text-4xl lg:text-5xl font-semibold text-stone-800 mt-4 mb-6">We're Here to Help</h2>
+       <p class="text-stone-600 text-lg mb-8">Have questions about Ayurveda or our products? Our wellness experts are happy to guide you on your healing journey.</p>
+       <div class="space-y-6">
+        <div class="flex items-center gap-4">
+         <div class="w-12 h-12 bg-green-100 rounded-xl flex items-center justify-center">
+          <svg class="w-6 h-6 text-green-600" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+          </svg>
+         </div>
+         <div>
+          <div class="text-sm text-stone-500">
+           Email Us
+          </div>
+          <div class="font-medium text-stone-800">
+           namaste@vaidya.in
+          </div>
+         </div>
+        </div>
+        <div class="flex items-center gap-4">
+         <div class="w-12 h-12 bg-amber-100 rounded-xl flex items-center justify-center">
+          <svg class="w-6 h-6 text-amber-600" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+          </svg>
+         </div>
+         <div>
+          <div class="text-sm text-stone-500">
+           Call Us
+          </div>
+          <div class="font-medium text-stone-800">
+           +91 98765 43210
+          </div>
+         </div>
+        </div>
+        <div class="flex items-center gap-4">
+         <div class="w-12 h-12 bg-green-100 rounded-xl flex items-center justify-center">
+          <svg class="w-6 h-6 text-green-600" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+          </svg>
+         </div>
+         <div>
+          <div class="text-sm text-stone-500">
+           Visit Us
+          </div>
+          <div class="font-medium text-stone-800">
+           Kerala, India
+          </div>
+         </div>
+        </div>
+       </div><!-- Social Links -->
+       <div class="mt-10">
+        <div class="text-sm text-stone-500 mb-4">
+         Follow Our Journey
+        </div>
+        <div class="flex gap-4"><a href="#" class="w-10 h-10 bg-white rounded-full flex items-center justify-center shadow-sm hover:shadow-md transition-shadow">
+          <svg class="w-5 h-5 text-stone-600" fill="currentColor" viewbox="0 0 24 24">
+           <path d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-1.29 2.213-.669 5.108 1.523 6.574-.806-.026-1.566-.247-2.229-.616-.054 2.281 1.581 4.415 3.949 4.89-.693.188-1.452.232-2.224.084.626 1.956 2.444 3.379 4.6 3.419-2.07 1.623-4.678 2.348-7.29 2.04 2.179 1.397 4.768 2.212 7.548 2.212 9.142 0 14.307-7.721 13.995-14.646.962-.695 1.797-1.562 2.457-2.549z" />
+          </svg></a> <a href="#" class="w-10 h-10 bg-white rounded-full flex items-center justify-center shadow-sm hover:shadow-md transition-shadow">
+          <svg class="w-5 h-5 text-stone-600" fill="currentColor" viewbox="0 0 24 24">
+           <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" />
+          </svg></a> <a href="#" class="w-10 h-10 bg-white rounded-full flex items-center justify-center shadow-sm hover:shadow-md transition-shadow">
+          <svg class="w-5 h-5 text-stone-600" fill="currentColor" viewbox="0 0 24 24">
+           <path d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0-3.897.266-4.356 2.62-4.385 8.816.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626.246 15.23 0 3.897-.266 4.356-2.62 4.385-8.816-.029-6.185-.484-8.549-4.385-8.816zm-10.615 12.816v-8l8 3.993-8 4.007z" />
+          </svg></a>
+        </div>
+       </div>
+      </div><!-- Contact Form -->
+      <div class="bg-white rounded-3xl p-8 lg:p-10 shadow-sm">
+       <h3 class="font-serif text-2xl font-semibold text-stone-800 mb-6">Send a Message</h3>
+       <form id="contact-form" onsubmit="handleFormSubmit(event)">
+        <div class="space-y-5">
+         <div><label for="name" class="block text-sm font-medium text-stone-700 mb-2">Your Name</label> <input type="text" id="name" name="name" required class="w-full px-4 py-3 rounded-xl border border-stone-200 focus:border-green-500 focus:ring-2 focus:ring-green-200 outline-none transition-all" placeholder="Enter your name">
+         </div>
+         <div><label for="email" class="block text-sm font-medium text-stone-700 mb-2">Email Address</label> <input type="email" id="email" name="email" required class="w-full px-4 py-3 rounded-xl border border-stone-200 focus:border-green-500 focus:ring-2 focus:ring-green-200 outline-none transition-all" placeholder="Enter your email">
+         </div>
+         <div><label for="subject" class="block text-sm font-medium text-stone-700 mb-2">Subject</label> <select id="subject" name="subject" class="w-full px-4 py-3 rounded-xl border border-stone-200 focus:border-green-500 focus:ring-2 focus:ring-green-200 outline-none transition-all bg-white"> <option value="">Select a topic</option> <option value="products">Product Inquiry</option> <option value="consultation">Wellness Consultation</option> <option value="orders">Order Support</option> <option value="other">Other</option> </select>
+         </div>
+         <div><label for="message" class="block text-sm font-medium text-stone-700 mb-2">Message</label> <textarea id="message" name="message" rows="4" required class="w-full px-4 py-3 rounded-xl border border-stone-200 focus:border-green-500 focus:ring-2 focus:ring-green-200 outline-none transition-all resize-none" placeholder="How can we help you?"></textarea>
+         </div><button type="submit" class="w-full btn-primary py-4 rounded-xl text-white font-medium text-lg"> Send Message </button>
+        </div>
+       </form>
+       <div id="form-success" class="hidden mt-6 p-4 bg-green-50 rounded-xl text-green-700 text-center">
+        <svg class="w-8 h-8 mx-auto mb-2 text-green-600" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+        </svg> Thank you! We'll get back to you soon.
+       </div>
+      </div>
+     </div>
+    </div>
+   </section><!-- Footer -->
+   <footer class="bg-stone-800 text-stone-300 py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+     <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-10 mb-12"><!-- Brand -->
+      <div class="lg:col-span-1">
+       <div class="flex items-center gap-3 mb-4">
+        <div class="w-10 h-10 rounded-full bg-gradient-to-br from-green-600 to-green-500 flex items-center justify-center">
+         <svg class="w-6 h-6 text-amber-200" viewbox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z" />
+         </svg>
+        </div><span class="font-serif text-2xl font-semibold text-white">Vaidya</span>
+       </div>
+       <p class="text-stone-400 text-sm leading-relaxed">Bringing the ancient wisdom of Ayurveda to modern life. Pure, authentic, and crafted with care.</p>
+      </div><!-- Quick Links -->
+      <div>
+       <h4 class="font-semibold text-white mb-4">Quick Links</h4>
+       <ul class="space-y-3 text-sm">
+        <li><a href="#products" class="hover:text-green-400 transition-colors">Products</a></li>
+        <li><a href="#knowledge" class="hover:text-green-400 transition-colors">Knowledge PDFs</a></li>
+        <li><a href="#benefits" class="hover:text-green-400 transition-colors">Benefits</a></li>
+        <li><a href="#testimonials" class="hover:text-green-400 transition-colors">Testimonials</a></li>
+       </ul>
+      </div><!-- Support -->
+      <div>
+       <h4 class="font-semibold text-white mb-4">Support</h4>
+       <ul class="space-y-3 text-sm">
+        <li><a href="#faq" class="hover:text-green-400 transition-colors">FAQ</a></li>
+        <li><a href="#contact" class="hover:text-green-400 transition-colors">Contact Us</a></li>
+        <li><a href="#" class="hover:text-green-400 transition-colors">Shipping Info</a></li>
+        <li><a href="#" class="hover:text-green-400 transition-colors">Returns Policy</a></li>
+       </ul>
+      </div><!-- Newsletter -->
+      <div>
+       <h4 class="font-semibold text-white mb-4">Stay Connected</h4>
+       <p class="text-stone-400 text-sm mb-4">Get wellness tips and exclusive offers</p>
+       <form onsubmit="event.preventDefault();" class="flex gap-2"><input type="email" placeholder="Your email" class="flex-1 px-4 py-2 rounded-lg bg-stone-700 border border-stone-600 text-white placeholder-stone-400 text-sm focus:border-green-500 outline-none"> <button type="submit" class="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors">
+         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+         </svg></button>
+       </form>
+      </div>
+     </div>
+     <div class="border-t border-stone-700 pt-8 flex flex-col sm:flex-row items-center justify-between gap-4">
+      <p class="text-stone-500 text-sm">© 2024 Vaidya Ayurveda. All rights reserved.</p>
+      <div class="flex items-center gap-6 text-sm text-stone-500"><a href="#" class="hover:text-stone-300 transition-colors">Privacy Policy</a> <a href="#" class="hover:text-stone-300 transition-colors">Terms of Service</a>
+      </div>
+     </div>
+    </div>
+   </footer>
+  </div>
+  <script>
+    // Default configuration
+    const defaultConfig = {
+      hero_title: 'Ancient Wisdom for Modern Wellness',
+      hero_subtitle: 'Discover the healing power of Ayurveda through authentic herbal products and sacred knowledge, carefully curated for your journey to holistic health.',
+      products_title: 'Our Healing Collection',
+      knowledge_title: 'Sacred Knowledge Library',
+      benefits_title: 'The Ayurvedic Difference',
+      cta_button_text: 'Begin Your Journey',
+      primary_color: '#5B7C4F',
+      secondary_color: '#D4AF37',
+      background_color: '#FAF8F5',
+      text_color: '#292524',
+      accent_color: '#8B5A2B'
+    };
+    
+    let config = { ...defaultConfig };
+    
+    // FAQ Toggle Function
+    function toggleFaq(button) {
+      const content = button.nextElementSibling;
+      const icon = button.querySelector('svg');
+      const isOpen = content.classList.contains('open');
+      
+      // Close all other FAQs
+      document.querySelectorAll('.faq-content').forEach(c => c.classList.remove('open'));
+      document.querySelectorAll('.faq-toggle svg').forEach(i => i.style.transform = 'rotate(0deg)');
+      
+      if (!isOpen) {
+        content.classList.add('open');
+        icon.style.transform = 'rotate(180deg)';
+      }
+    }
+    
+    // Scroll Animation Observer
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: '0px 0px -100px 0px'
+    };
+    
+    const scrollObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, observerOptions);
+    
+    // Observe all scroll-animate elements
+    document.addEventListener('DOMContentLoaded', () => {
+      document.querySelectorAll('.scroll-animate').forEach(el => {
+        scrollObserver.observe(el);
+      });
+    });
+    
+    // Form Submit Handler
+    function handleFormSubmit(event) {
+      event.preventDefault();
+      const form = document.getElementById('contact-form');
+      const success = document.getElementById('form-success');
+      form.style.display = 'none';
+      success.classList.remove('hidden');
+    }
+    
+    // Element SDK Integration
+    async function onConfigChange(newConfig) {
+      config = { ...config, ...newConfig };
+      
+      // Update hero title
+      const heroTitle = document.getElementById('hero-title');
+      if (heroTitle && config.hero_title) {
+        heroTitle.innerHTML = config.hero_title.includes('Modern Wellness') 
+          ? config.hero_title.replace('Modern Wellness', '<span class="gradient-gold">Modern Wellness</span>')
+          : config.hero_title;
+      }
+      
+      // Update hero subtitle
+      const heroSubtitle = document.getElementById('hero-subtitle');
+      if (heroSubtitle && config.hero_subtitle) {
+        heroSubtitle.textContent = config.hero_subtitle;
+      }
+      
+      // Update products title
+      const productsTitle = document.getElementById('products-title');
+      if (productsTitle && config.products_title) {
+        productsTitle.textContent = config.products_title;
+      }
+      
+      // Update knowledge title
+      const knowledgeTitle = document.getElementById('knowledge-title');
+      if (knowledgeTitle && config.knowledge_title) {
+        knowledgeTitle.textContent = config.knowledge_title;
+      }
+      
+      // Update benefits title
+      const benefitsTitle = document.getElementById('benefits-title');
+      if (benefitsTitle && config.benefits_title) {
+        benefitsTitle.textContent = config.benefits_title;
+      }
+      
+      // Update CTA button
+      const ctaButton = document.getElementById('cta-button');
+      if (ctaButton && config.cta_button_text) {
+        ctaButton.textContent = config.cta_button_text;
+      }
+      
+      // Update colors
+      document.documentElement.style.setProperty('--primary-color', config.primary_color || defaultConfig.primary_color);
+      document.documentElement.style.setProperty('--secondary-color', config.secondary_color || defaultConfig.secondary_color);
+      
+      // Update primary buttons
+      const primaryButtons = document.querySelectorAll('.btn-primary');
+      primaryButtons.forEach(btn => {
+        btn.style.background = `linear-gradient(135deg, ${config.primary_color || defaultConfig.primary_color} 0%, ${lightenColor(config.primary_color || defaultConfig.primary_color, 20)} 100%)`;
+      });
+    }
+    
+    function lightenColor(color, percent) {
+      const num = parseInt(color.replace('#', ''), 16);
+      const amt = Math.round(2.55 * percent);
+      const R = (num >> 16) + amt;
+      const G = (num >> 8 & 0x00FF) + amt;
+      const B = (num & 0x0000FF) + amt;
+      return '#' + (0x1000000 + (R < 255 ? R < 1 ? 0 : R : 255) * 0x10000 + (G < 255 ? G < 1 ? 0 : G : 255) * 0x100 + (B < 255 ? B < 1 ? 0 : B : 255)).toString(16).slice(1);
+    }
+    
+    function mapToCapabilities(config) {
+      return {
+        recolorables: [
+          {
+            get: () => config.background_color || defaultConfig.background_color,
+            set: (value) => {
+              config.background_color = value;
+              if (window.elementSdk) window.elementSdk.setConfig({ background_color: value });
+            }
+          },
+          {
+            get: () => config.accent_color || defaultConfig.accent_color,
+            set: (value) => {
+              config.accent_color = value;
+              if (window.elementSdk) window.elementSdk.setConfig({ accent_color: value });
+            }
+          },
+          {
+            get: () => config.text_color || defaultConfig.text_color,
+            set: (value) => {
+              config.text_color = value;
+              if (window.elementSdk) window.elementSdk.setConfig({ text_color: value });
+            }
+          },
+          {
+            get: () => config.primary_color || defaultConfig.primary_color,
+            set: (value) => {
+              config.primary_color = value;
+              if (window.elementSdk) window.elementSdk.setConfig({ primary_color: value });
+            }
+          },
+          {
+            get: () => config.secondary_color || defaultConfig.secondary_color,
+            set: (value) => {
+              config.secondary_color = value;
+              if (window.elementSdk) window.elementSdk.setConfig({ secondary_color: value });
+            }
+          }
+        ],
+        borderables: [],
+        fontEditable: {
+          get: () => config.font_family || 'Cormorant Garamond',
+          set: (value) => {
+            config.font_family = value;
+            if (window.elementSdk) window.elementSdk.setConfig({ font_family: value });
+          }
+        },
+        fontSizeable: {
+          get: () => config.font_size || 16,
+          set: (value) => {
+            config.font_size = value;
+            if (window.elementSdk) window.elementSdk.setConfig({ font_size: value });
+          }
+        }
+      };
+    }
+    
+    function mapToEditPanelValues(config) {
+      return new Map([
+        ['hero_title', config.hero_title || defaultConfig.hero_title],
+        ['hero_subtitle', config.hero_subtitle || defaultConfig.hero_subtitle],
+        ['products_title', config.products_title || defaultConfig.products_title],
+        ['knowledge_title', config.knowledge_title || defaultConfig.knowledge_title],
+        ['benefits_title', config.benefits_title || defaultConfig.benefits_title],
+        ['cta_button_text', config.cta_button_text || defaultConfig.cta_button_text]
+      ]);
+    }
+    
+    // Initialize SDK
+    if (window.elementSdk) {
+      window.elementSdk.init({
+        defaultConfig,
+        onConfigChange,
+        mapToCapabilities,
+        mapToEditPanelValues
+      });
+    }
+  </script>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9bd55a2252e940a5',t:'MTc2ODMxMjExNS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
