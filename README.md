@@ -76,19 +76,19 @@ No frameworks. No backend. No build tools.
 > Screenshots are stored in the `screenshots` folder
 
 ### 🏠 Home
-![Home](screenshots/home.png)
+![Home](screenshots/home.jpeg)
 
 ### 🌿 Products
-![Products](screenshots/products.png)
+![Products](screenshots/products.jpeg)
 
 ### 📚 Knowledge Library
-![Knowledge](screenshots/knowledge.png)
+![Knowledge](screenshots/knowledge.jpeg)
 
 ### 🔁 How It Works
-![How It Works](screenshots/how-it-works.png)
+![How It Works](screenshots/how-it-works.jpeg)
 
 ### 💬 Testimonials & FAQ
-![Testimonials](screenshots/testimonials.png)
+![Testimonials](screenshots/testimonials.jpeg)
 
 ---
 
