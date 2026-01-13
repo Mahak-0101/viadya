@@ -92,5 +92,12 @@ No frameworks. No backend. No build tools.
 
 ---
 
-## 📂 Project Structure
+---
+
+## 🚀 How to Use
+
+1. Clone the repository
+   ```bash
+   git clone https://github.com/your-username/vaidya-ayurveda-frontend.git
+
 
