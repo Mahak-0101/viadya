@@ -1,68 +1,96 @@
-🌿 Vaidya – Ayurvedic Wellness Website
+# 🌿 Vaidya — Ayurvedic Wellness Website (Frontend)
 
-A modern, responsive Ayurvedic wellness website that blends ancient Indian healing wisdom with a clean, modern user experience.
-The platform supports physical Ayurvedic products and paid digital PDF downloads with instant access after payment.
+A premium **frontend-only Ayurvedic wellness website** designed to blend  
+**ancient Indian healing wisdom** with a **modern, calm, and user-friendly interface**.
 
-✨ Features
+This project focuses purely on **UI/UX, visual storytelling, and smooth interactions**.  
+Backend, payments, and downloads can be integrated later as per business needs.
 
-🌿 Premium Ayurvedic brand design (modern + traditional)
+---
 
-📱 Fully responsive (mobile, tablet, desktop)
+## ✨ Highlights
 
-🧠 Knowledge Library with paid PDF downloads
+- 🌿 Modern Ayurveda-inspired design
+- 🎨 Calm, earthy color palette
+- 🧠 Knowledge Library UI (Paid PDF concept)
+- 🛍️ Product showcase UI
+- 📱 Fully responsive layout
+- 🎥 Smooth animations & micro-interactions
+- 🧭 Clean and intuitive navigation
+- 📖 Story-driven sections (Benefits, Testimonials, FAQ)
+- ⚡ Fast and lightweight frontend
 
-💳 Secure payment → instant auto-download
+---
 
-🛍️ Ayurvedic product showcase
+## 🎯 Project Purpose
 
-📖 “How It Works” flow for digital products
+This frontend is designed for:
+- Ayurvedic brands
+- Wellness startups
+- Digital knowledge sellers
+- Health & lifestyle businesses
 
-⭐ Testimonials & FAQ section
+It visually supports a **“Pay → Instant PDF Download”** flow  
+**without implementing backend logic**, keeping the frontend clean and flexible.
 
-📩 Contact form
+---
 
-🎨 Smooth animations & micro-interactions
+## 🧭 Website Sections
 
-⚡ Built with Tailwind CSS for performance
+- Hero (Brand story & call-to-action)
+- Ayurvedic Products (UI cards)
+- Knowledge Library (PDF UI)
+- How It Works (visual flow)
+- Benefits of Ayurveda
+- Testimonials
+- FAQ
+- Contact & Footer
 
-🧭 Website Flow (Paid PDF – Option A)
+---
 
-User selects an Ayurvedic PDF
+## 🎨 Design Philosophy
 
-Secure payment via gateway
+- **Ancient wisdom, modern presentation**
+- Minimal but premium visuals
+- Comfortable typography for all age groups
+- Trust-focused layout
+- Wellness-first user experience
 
-Payment verification on backend
+---
 
-Auto redirect to Thank You page
+## 🛠️ Tech Stack (Frontend Only)
 
-PDF downloads automatically (secure, time-limited link)
+- HTML5
+- Tailwind CSS
+- Vanilla JavaScript
+- Google Fonts  
+  - Cormorant Garamond (Headings)  
+  - DM Sans (Body)
 
-This model is simple, trusted, and scalable.
+No frameworks. No backend. No build tools.
 
-🛠️ Tech Stack
+---
 
-Frontend
+## 📸 Screenshots
 
-HTML5
+> Screenshots are stored in the `screenshots` folder
 
-Tailwind CSS
+### 🏠 Home
+![Home](screenshots/home.png)
 
-JavaScript (Vanilla)
+### 🌿 Products
+![Products](screenshots/products.png)
 
-Backend (Planned / Optional)
+### 📚 Knowledge Library
+![Knowledge](screenshots/knowledge.png)
 
-Node.js / PHP
+### 🔁 How It Works
+![How It Works](screenshots/how-it-works.png)
 
-Payment Gateway (Razorpay / Stripe)
+### 💬 Testimonials & FAQ
+![Testimonials](screenshots/testimonials.png)
 
-Secure PDF delivery with token-based access
+---
 
-Design
+## 📂 Project Structure
 
-Google Fonts (Cormorant Garamond, DM Sans)
-
-Custom animations & gradients
-
-Ayurveda-inspired color palette
-
-📸 Screenshots
